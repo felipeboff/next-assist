@@ -19,7 +19,7 @@ Freeze the obligations. Free the plan. Prove it with someone who did not build i
   the text below says "commit" before the user's request, read "change in the working tree".
 - **Verify before the review.** When every proof is green, run `check_proofs.py <feature>` over
   the working tree. It exits 1 because the tree is dirty, and that is the only failure allowed:
-  every row in `proofs.md` passes. Dispatch the Verifier over the working tree (`git diff main`
+  every row in `proofs.md` passes. Dispatch the Verifier over the working tree (`git diff master`
   plus the untracked files) and fix its findings in place. Then run `check_proofs.py` again with
   `--mutations .specs/features/<feature>/mutations.json`: every row passes and every mutation is
   killed. `mutate.py` journals and restores each file byte for byte, uncommitted changes
