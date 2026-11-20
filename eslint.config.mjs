@@ -49,13 +49,7 @@ const eslintConfig = defineConfig([
         {
           type: "module-composition",
           mode: "full",
-          pattern: "src/modules/*/composition.ts",
-          capture: ["module"],
-        },
-        {
-          type: "module-composition",
-          mode: "full",
-          pattern: "src/modules/*/composition.client.ts",
+          pattern: "src/modules/*/composition*.ts",
           capture: ["module"],
         },
         ...MODULE_LAYERS.map((layer) => ({
@@ -101,6 +95,7 @@ const eslintConfig = defineConfig([
               from: { type: "module-composition" },
               allow: {
                 to: [
+                  sameModule("module-composition"),
                   ...MODULE_LAYERS.map((layer) => sameModule(`module-${layer}`)),
                   ...shared("infrastructure"),
                 ],

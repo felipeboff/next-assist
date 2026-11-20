@@ -36,6 +36,15 @@ describe("createBetterAuthGateway", () => {
     await expect(gateway.signIn(credentials)).resolves.toEqual({ ok: false, failure: "unknown-employee" });
   });
 
+  it("signs out through BetterAuth", async () => {
+    const client = fakeClient(async () => ({ error: null }));
+    const gateway = createBetterAuthGateway(client);
+
+    await gateway.signOut();
+
+    expect(client.signOut).toHaveBeenCalledOnce();
+  });
+
   it("treats a thrown network error as unavailable", async () => {
     const gateway = createBetterAuthGateway(
       fakeClient(async () => {

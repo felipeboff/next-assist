@@ -25,7 +25,7 @@ export async function seedIdentity(db: Database): Promise<number> {
 
   for (const person of seedPeople) {
     const userId = randomUUID();
-    const inserted = await db
+    const [row] = await db
       .insert(user)
       .values({ id: userId, name: person.name, email: person.email, role: person.role, emailVerified: true })
       .onConflictDoUpdate({
@@ -33,11 +33,6 @@ export async function seedIdentity(db: Database): Promise<number> {
         set: { name: person.name, role: person.role },
       })
       .returning({ id: user.id, isNew: sql<boolean>`(xmax = 0)` });
-
-    const row = inserted[0];
-    if (!row) {
-      continue;
-    }
 
     const existingCredential = await db
       .select({ id: account.id })
