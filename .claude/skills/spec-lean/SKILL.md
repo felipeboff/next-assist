@@ -42,7 +42,10 @@ Freeze the obligations. Free the plan. Prove it with someone who did not build i
   need their own request.
 - **Stack and proofs**: Next.js (App Router) + TypeScript strict, Drizzle on PostgreSQL,
   BetterAuth, Mastra for the agent, Docker Compose for local services, pnpm. Unit and integration
-  proofs run with Vitest (`pnpm vitest run <filter>`), grouped into one run by `check_proofs.py`;
+  proofs run with Vitest (`pnpm vitest run --project unit <filter>`), grouped into one run by
+  `check_proofs.py`, integration proofs with `pnpm vitest run --project integration <filter>` against the `_test`
+  database, and both scopes keep 100% coverage (`pnpm test:unit:coverage`,
+  `pnpm test:integration:coverage`);
   end-to-end proofs run with Playwright (`pnpm playwright test <filter>`) and run alone. A proof
   that needs Postgres or another service states it, and the services come up with
   `docker compose up -d` before `check_proofs.py`. Agent decisions are proven against the

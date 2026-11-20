@@ -11,4 +11,5 @@
   `.claude/skills/evolutionary-modular-architecture/references/stack-2026.md`.
 - Feature work follows skill `spec-lean`. No commit until the user asks; Conventional Commits.
 - Local run: `docker compose up -d`, `pnpm db:migrate`, `pnpm db:seed`, `pnpm dev`.
-  Checks: `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm test:e2e`.
+  Checks: `pnpm lint`, `pnpm typecheck`, `pnpm test:unit:coverage` and `pnpm test:integration:coverage`
+  (100% floors; integration needs `docker compose up -d`), `pnpm test:e2e`.

@@ -65,7 +65,19 @@ that imported it would fail the build; the browser side goes through `client.ts`
 
 - **UI**: built only from `@/shared/presentation/ui` (skill `ui-framework`); ESLint rejects raw
   HTML elements, `className` and `style` in `app/`, `main/` and `modules/`.
-- **Tests**: `*.spec.ts` next to the file (Vitest); end-to-end specs in `e2e/` (Playwright).
+- **Tests**: Vitest, with specs next to the file they test. Each level owns a coverage scope with
+  a 100% floor in `coverage-thresholds.json`:
+  - **unit** (`*.spec.ts(x)`, jsdom + Testing Library): `modules/*/domain`, `modules/*/application`,
+    `shared/domain`, `shared/presentation`. `pnpm test:unit:coverage`.
+  - **integration** (`*.integration.spec.ts`): `modules/*/infrastructure`, `modules/*/composition*.ts`,
+    `shared/infrastructure`, against PostgreSQL in its own `<database>_test` database (created and
+    migrated by `testing/integration.global-setup.ts`; needs `docker compose up -d`).
+    `pnpm test:integration:coverage`.
+  - **e2e**: Playwright journeys in `e2e/` (`pnpm test:e2e`), no coverage floor yet.
+
+  lint-staged runs the unit specs related to the staged files; the pre-push hook runs both
+  coverage suites. Test-only helpers live in a `testing/` folder and are out of coverage.
+
 - **Database**: each module owns its tables in `infrastructure/*.schema.ts`; migrations in
   `drizzle/` are generated (`pnpm db:generate`) and committed.
 - **Language**: code, comments and docs in English; user-facing copy in pt-BR.
