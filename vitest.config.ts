@@ -26,6 +26,8 @@ const LEVEL_SCOPES: Record<string, string[]> = {
     `src/modules/*/infrastructure/${CODE}`,
     "src/modules/*/composition.ts",
     "src/modules/*/composition.client.ts",
+    // Adapters between modules, assembled in the composition root (not its React providers).
+    "src/main/*.ts",
     `src/shared/infrastructure/${CODE}`,
   ],
 };

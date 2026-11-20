@@ -8,12 +8,15 @@ src/
 ├── app/            Next.js routes, layouts and guards. No logic.
 │   ├── (public)/       signed out only: login. The layout sends a signed-in user to `/`.
 │   ├── (protected)/    signed in only: the app. The layout sends a visitor to `/login`, and every
-│   │                   page calls `requireUser()` (the layout alone does not stop a page from
-│   │                   rendering, see Next.js "Layouts and auth checks").
+│   │                   page calls `requireUser()` or `requireRole()` (the layout alone does not
+│   │                   stop a page from rendering, see Next.js "Layouts and auth checks").
+│   │   ├── (employee)/     `/` chat and `/perfil`, in the sidebar shell; an analyst goes to /console
+│   │   └── (analyst)/      `/console`; an employee goes to `/`
 │   └── api/auth/       BetterAuth's HTTP handler
 ├── proxy.ts        Optimistic session-cookie check before routes (Next.js 16's middleware).
-├── main/           Composition root for the browser: builds client dependencies and mounts
-│                   the providers (client-providers.tsx, used by app/layout.tsx).
+├── main/           Composition root for the browser: builds client dependencies, adapts one
+│                   module to another's port (ticket-desk.ts) and mounts the providers
+│                   (client-providers.tsx, used by app/layout.tsx).
 ├── modules/
 │   └── <context>/
 │       ├── domain/               plain TypeScript: entities, value objects, rules, failures
@@ -34,11 +37,27 @@ src/
 
 Current modules:
 
-- `identity`: login (Screen 1) and sign out over BetterAuth with the Drizzle adapter; the PRD
-  rule "seeded employees with any password" lives in `infrastructure/better-auth.ts`. The
-  current user is read on the server through the `SessionReader` port; sign-in runs in the
-  browser through the `signIn` use case and the `AuthGateway` port, so BetterAuth's HTTP rate
-  limit applies. Employees and analysts are seeded by `infrastructure/identity.seed.ts`.
+- `identity`: login (Screen 1), profile and sign out over BetterAuth with the Drizzle adapter; the
+  PRD rule "seeded employees with any password" lives in `infrastructure/better-auth.ts`. The
+  current user is read on the server through the `SessionReader` port and the password age through
+  `CredentialReader`; sign-in runs in the browser through the `signIn` use case and the
+  `AuthGateway` port, so BetterAuth's HTTP rate limit applies. The password reset request is a
+  mock (`PasswordReset` port) until an e-mail service exists. Employees and analysts are seeded by
+  `infrastructure/identity.seed.ts`.
+- `tickets`: the simulated ticket system, separate from the agent. The domain owns the Annex A
+  rules: ticket vocabulary, SLA deadlines on the business calendar (`domain/sla.ts`) and when a
+  ticket is overdue. The `TicketService` port is served by an in-memory adapter with the Annex B
+  sample data; presentation exports the employee tickets panel of the console.
+- `conversations`: the employee chat (Screens 2 and 3) and the analyst console (Screens 4 and 5).
+  The domain holds the agent reply contract (`AgentReply`: the decision behind each reply, then
+  what the chat renders), the hand-over states, the message limit and the console's filter, search
+  and order. Screens reach behaviour through the `EmployeeChat` and `AnalystConsole` ports; until
+  the Mastra agent exists they are served by a scripted agent and an in-memory console
+  (`infrastructure/`), mounted in `composition.client.ts`.
+
+Modules that depend on each other meet in `main/` (AD-005 in `.specs/STATE.md`): `conversations`
+declares the `TicketDesk` port it needs, and `main/ticket-desk.ts` adapts the `tickets` public API
+into it. The in-browser mocks start from the sample data on every page load.
 
 ## Rules
 
@@ -70,7 +89,7 @@ that imported it would fail the build; the browser side goes through `client.ts`
   - **unit** (`*.spec.ts(x)`, jsdom + Testing Library): `modules/*/domain`, `modules/*/application`,
     `shared/domain`, `shared/presentation`. `pnpm test:unit:coverage`.
   - **integration** (`*.integration.spec.ts`): `modules/*/infrastructure`, `modules/*/composition*.ts`,
-    `shared/infrastructure`, against PostgreSQL in its own `<database>_test` database (created and
+    `main/*.ts` (the adapters between modules), `shared/infrastructure`, against PostgreSQL in its own `<database>_test` database (created and
     migrated by `testing/integration.global-setup.ts`; needs `docker compose up -d`).
     `pnpm test:integration:coverage`.
   - **e2e**: Playwright journeys in `e2e/` (`pnpm test:e2e`), no coverage floor yet.

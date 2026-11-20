@@ -72,14 +72,13 @@ test.describe("login (Screen 1)", () => {
     await fillAndSubmit(page, seededEmployee.email, `any-${Date.now()}`);
 
     await expect(page).toHaveURL(/\/$/);
-    await expect(
-      page.getByRole("heading", { level: 1, name: `Olá, ${seededEmployee.firstName}.` }),
-    ).toBeVisible();
+    await expect(page.getByText(`Olá, ${seededEmployee.firstName}. Como posso ajudar?`)).toBeVisible();
 
     await page.goto("/login");
     await expect(page).toHaveURL(/\/$/);
 
-    await page.getByRole("button", { name: "Sair" }).click();
+    // By keyboard: in development the Next.js indicator may float over the sidebar's corner.
+    await page.getByRole("button", { name: "Sair" }).press("Enter");
     await expect(page).toHaveURL(/\/login$/);
     await page.goto("/");
     await expect(page).toHaveURL(/\/login$/);
