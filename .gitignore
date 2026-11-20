@@ -53,3 +53,7 @@ design
 
 # demo recordings (skill demo)
 /.demos/
+
+# spec-lean: prototype captures stay local like design/; the author's pictures are versioned
+/.specs/features/*/captures/*.png
+!/.specs/features/*/captures/*.running.png
