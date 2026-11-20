@@ -16,19 +16,25 @@ Screens never use them directly: they pick component props that map to them.
 | Token | Value | Use |
 | --- | --- | --- |
 | `canvas` | `#ffffff` | Page and field background (the prototype uses pure white) |
-| `surface-subtle` | `#f6f7f9` | Hover fills, disabled fields, card footers |
+| `surface-subtle` | `#f6f7f9` | Hover fills, disabled fields, card footers, the console rail |
+| `surface-muted` | `#eef1f5` | Background of the console thread (white bubbles and cards sit on it) |
 | `ink` | `#1b2431` | Dark brand surface (login aside); also the default text color |
 | `ink-raised` | `#242d39` | Card on the ink surface |
 | `ink-bubble` | `#353d49` | Assistant bubble on the ink surface |
 | `ink-line` / `ink-divider` | `#2d3541` / `#283040` | Borders and dividers on the ink surface |
 | `text` / `text-secondary` / `text-muted` / `text-placeholder` | `#1b2431` / `#3d4656` / `#5b6472` / `#8a919c` | Text on light surfaces |
 | `on-ink` / `on-ink-soft` / `on-ink-muted` / `on-ink-subtle` / `on-ink-faint` | `#fff` / `#d3d5d7` / `#afb3b7` / `#989ca2` / `#878c92` | Text on the ink surface, strongest to faintest |
-| `line` / `line-subtle` | `#e3e6e9` / `#eceef1` | Field borders / dividers |
+| `line` / `line-subtle` / `line-soft` | `#e3e6e9` / `#eceef1` / `#f2f3f5` | Field borders / dividers / card borders and row dividers on white |
 | `brand` | `#037af6` | The logo mark only |
-| `primary` (+ `-hover`, `-active`, `-soft`) | `#0062c4` | Actions, links, focus, checked controls |
-| `success` (+ `-text`) | `#00bd6c` | Online / ok dots and text |
-| `warning` (+ `-text`) | `#f5a500` | Pending / attention dots and text |
-| `danger` (+ `-soft`) | `#c8352b` | Errors (not in the prototype yet; chosen to sit with the palette) |
+| `primary` (+ `-hover` `#0057ae`, `-active` `#004c99`) | `#0062c4` | Actions, links, focus, checked controls |
+| `primary-soft` / `primary-wash` / `primary-muted` / `primary-tint` | `#edf6fe` / `#f5f9fd` / `#e6effa` / `#dde9f5` | Current nav item and pressed chips / checked radio row / the agent's bubble in the console / "IA" tag |
+| `primary-line` | `#77bdfa` | Border of a chosen chip |
+| `success` / `success-text` | `#00bd6c` / `#00804a` | Online / ok dots / text |
+| `success-soft` / `success-muted` / `success-tint` | `#ebfaf3` / `#e3f4ea` / `#dbedea` | Online tag / the analyst's bubble in the console / team tag |
+| `warning` / `warning-text` | `#f5a500` / `#946300` | Pending / attention dots / text |
+| `warning-soft` | `#fef7e7` | Waiting tag, waiting notice |
+| `danger` / `danger-soft` | `#c4161d` / `#fef1f1` | Errors and destructive actions (`danger` and `danger-soft` buttons), measured from the prototype |
+| `avatar-<tone>` / `avatar-<tone>-text` | blue `#dce9f7`/`#0062c4`, orange `#f6e3d3`/`#9a4a12`, violet `#e6e1f7`/`#5b3fc4`, green `#ddf0e6`/`#0a7f4b`, rose `#f7e1e6`/`#a3324f`, slate `#e5e8ec`/`#3d4656`, amber `#fbefd0`/`#8a6100` | `Avatar` fill and initials, one pair per tone |
 
 Components take tone names (`muted`, `on-ink-subtle`, `warning`...), never hex values.
 
@@ -48,6 +54,8 @@ Components take tone names (`muted`, `on-ink-subtle`, `warning`...), never hex v
 | `md` | 15.5px / 24px | Lead text under a title, large buttons |
 | `lg` | 16px / 25px | Intro paragraphs |
 | `xl` | 17px / 24px | Reserved |
+| `2xl` | 20px / 28px | Console column titles (`Heading size="section"`) |
+| `3xl` | 24px / 32px | App page titles (`Heading size="page"`) |
 | `display-sm` | 32px / 36px | Stat values |
 | `display-md` | 36px / 40px | Page titles ("Entrar") |
 | `display-lg` | 48px / 56px | Hero titles |
@@ -65,8 +73,9 @@ Props named `gap`, `padding`, `paddingX`, `paddingY`, `paddingTop` take `Space`:
 Radius: `xs` 4 (checkbox, link focus) · `sm` 6 (buttons) · `md` 8 (fields, bubbles) · `lg` 12 ·
 `xl` 16 (cards) · `full` (tags, dots).
 
-Shadows: `shadow-field` (fields, secondary buttons, checkbox) and `shadow-primary` (the
-primary button's blue glow).
+Shadows: `shadow-field` (fields, secondary buttons, checkbox, white bubbles), `shadow-primary`
+(the primary button's blue glow), `shadow-card` (cards on white, the current rail tile) and
+`shadow-popover` (menus, dialogs).
 
 ## Breakpoints
 
@@ -76,7 +85,9 @@ column takes the screen.
 ## Motion
 
 Color and shadow transitions of 150ms with `ease-out-quart`. Spinners keep spinning under
-`prefers-reduced-motion`, slower. No layout animation.
+`prefers-reduced-motion`, slower. `animate-typing` (`typing` keyframes, 1.2s, infinite) pulses
+the dots of `TypingIndicator`, which stops it under `prefers-reduced-motion`. No layout
+animation.
 
 ## Focus
 

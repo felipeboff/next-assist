@@ -1,3 +1,5 @@
+import { marginStartClass, type Space } from "./tokens";
+
 const toneClass = {
   line: "border-line",
   "line-subtle": "border-line-subtle",
@@ -7,9 +9,11 @@ const toneClass = {
 export type DividerProps = {
   tone?: keyof typeof toneClass;
   orientation?: "horizontal" | "vertical";
+  /** Starts a horizontal line after this space, to align it with a column of text. */
+  insetStart?: Space;
 };
 
-export function Divider({ tone = "line-subtle", orientation = "horizontal" }: DividerProps) {
+export function Divider({ tone = "line-subtle", orientation = "horizontal", insetStart }: DividerProps) {
   if (orientation === "vertical") {
     return (
       <span
@@ -19,5 +23,6 @@ export function Divider({ tone = "line-subtle", orientation = "horizontal" }: Di
       />
     );
   }
-  return <hr className={`w-full border-0 border-t ${toneClass[tone]}`} />;
+  const inset = insetStart ? `${marginStartClass[insetStart]} w-auto` : "w-full";
+  return <hr className={`${inset} border-0 border-t ${toneClass[tone]}`} />;
 }

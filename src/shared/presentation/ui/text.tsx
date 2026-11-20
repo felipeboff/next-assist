@@ -22,8 +22,16 @@ const text = tv({
     truncate: { true: "truncate", false: "" },
     nowrap: { true: "whitespace-nowrap", false: "" },
     tabular: { true: "tabular-nums", false: "" },
+    italic: { true: "italic", false: "" },
   },
-  defaultVariants: { align: "start", measure: "none", truncate: false, nowrap: false, tabular: false },
+  defaultVariants: {
+    align: "start",
+    measure: "none",
+    truncate: false,
+    nowrap: false,
+    tabular: false,
+    italic: false,
+  },
 });
 
 export type TextProps = {
@@ -37,6 +45,7 @@ export type TextProps = {
   truncate?: boolean;
   nowrap?: boolean;
   tabular?: boolean;
+  italic?: boolean;
   role?: "status" | "alert";
   "aria-live"?: "polite" | "assertive";
   children: ReactNode;
@@ -52,6 +61,7 @@ export function Text({
   truncate,
   nowrap,
   tabular,
+  italic,
   children,
   ...rest
 }: TextProps) {
@@ -59,7 +69,7 @@ export function Text({
     textSizeClass[size],
     textToneClass[tone],
     fontWeightClass[weight],
-    text({ align, measure, truncate, nowrap, tabular }),
+    text({ align, measure, truncate, nowrap, tabular, italic }),
   ].join(" ");
 
   return (

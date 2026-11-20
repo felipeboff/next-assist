@@ -75,6 +75,36 @@ export const paddingTopClass: Record<Space, string> = {
   "7xl": "pt-16",
 };
 
+export const paddingBottomClass: Record<Space, string> = {
+  none: "pb-0",
+  xs: "pb-1",
+  sm: "pb-2",
+  md: "pb-3",
+  lg: "pb-4",
+  xl: "pb-5",
+  "2xl": "pb-6",
+  "3xl": "pb-8",
+  "4xl": "pb-10",
+  "5xl": "pb-12",
+  "6xl": "pb-14",
+  "7xl": "pb-16",
+};
+
+export const marginStartClass: Record<Space, string> = {
+  none: "ms-0",
+  xs: "ms-1",
+  sm: "ms-2",
+  md: "ms-3",
+  lg: "ms-4",
+  xl: "ms-5",
+  "2xl": "ms-6",
+  "3xl": "ms-8",
+  "4xl": "ms-10",
+  "5xl": "ms-12",
+  "6xl": "ms-14",
+  "7xl": "ms-16",
+};
+
 export type TextTone =
   | "default"
   | "secondary"
@@ -106,7 +136,7 @@ export const textToneClass: Record<TextTone, string> = {
   inherit: "text-inherit",
 };
 
-export type TextSize = "2xs" | "xs" | "sm" | "md" | "lg" | "xl";
+export type TextSize = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 
 export const textSizeClass: Record<TextSize, string> = {
   "2xs": "text-2xs",
@@ -115,6 +145,8 @@ export const textSizeClass: Record<TextSize, string> = {
   md: "text-md",
   lg: "text-lg",
   xl: "text-xl",
+  "2xl": "text-2xl",
+  "3xl": "text-3xl",
 };
 
 export type FontWeight = "regular" | "medium" | "semibold";

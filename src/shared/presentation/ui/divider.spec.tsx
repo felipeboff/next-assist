@@ -18,4 +18,17 @@ describe("Divider", () => {
     expect(divider).toHaveAttribute("aria-orientation", "vertical");
     expect(divider).toHaveClass("border-ink-divider");
   });
+
+  it("starts after an inset to line up with a column of text", () => {
+    render(<Divider insetStart="7xl" />);
+
+    const divider = screen.getByRole("separator");
+    expect(divider).toHaveClass("ms-16", "w-auto");
+    expect(divider).not.toHaveClass("w-full");
+  });
+
+  it("spans the full width without an inset", () => {
+    render(<Divider />);
+    expect(screen.getByRole("separator")).toHaveClass("w-full");
+  });
 });

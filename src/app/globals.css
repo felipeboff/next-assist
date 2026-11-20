@@ -12,6 +12,7 @@
   --color-white: #ffffff;
   --color-canvas: #ffffff;
   --color-surface-subtle: #f6f7f9;
+  --color-surface-muted: #eef1f5;
 
   --color-ink: #1b2431;
   --color-ink-raised: #242d39;
@@ -32,20 +33,44 @@
 
   --color-line: #e3e6e9;
   --color-line-subtle: #eceef1;
+  --color-line-soft: #f2f3f5;
 
   --color-brand: #037af6;
 
   --color-primary: #0062c4;
   --color-primary-hover: #0057ae;
   --color-primary-active: #004c99;
-  --color-primary-soft: #e8f1fb;
+  --color-primary-soft: #edf6fe;
+  --color-primary-wash: #f5f9fd;
+  --color-primary-muted: #e6effa;
+  --color-primary-tint: #dde9f5;
+  --color-primary-line: #77bdfa;
 
   --color-success: #00bd6c;
-  --color-success-text: #0a7f4b;
+  --color-success-text: #00804a;
+  --color-success-soft: #ebfaf3;
+  --color-success-muted: #e3f4ea;
+  --color-success-tint: #dbedea;
   --color-warning: #f5a500;
-  --color-warning-text: #8a5d00;
-  --color-danger: #c8352b;
-  --color-danger-soft: #fdf1f0;
+  --color-warning-text: #946300;
+  --color-warning-soft: #fef7e7;
+  --color-danger: #c4161d;
+  --color-danger-soft: #fef1f1;
+
+  --color-avatar-blue: #dce9f7;
+  --color-avatar-blue-text: #0062c4;
+  --color-avatar-orange: #f6e3d3;
+  --color-avatar-orange-text: #9a4a12;
+  --color-avatar-violet: #e6e1f7;
+  --color-avatar-violet-text: #5b3fc4;
+  --color-avatar-green: #ddf0e6;
+  --color-avatar-green-text: #0a7f4b;
+  --color-avatar-rose: #f7e1e6;
+  --color-avatar-rose-text: #a3324f;
+  --color-avatar-slate: #e5e8ec;
+  --color-avatar-slate-text: #3d4656;
+  --color-avatar-amber: #fbefd0;
+  --color-avatar-amber-text: #8a6100;
 
   --text-2xs: 0.78125rem;
   --text-2xs--line-height: 1.125rem;
@@ -59,6 +84,10 @@
   --text-lg--line-height: 1.5625rem;
   --text-xl: 1.0625rem;
   --text-xl--line-height: 1.5rem;
+  --text-2xl: 1.25rem;
+  --text-2xl--line-height: 1.75rem;
+  --text-3xl: 1.5rem;
+  --text-3xl--line-height: 2rem;
   --text-display-sm: 2rem;
   --text-display-sm--line-height: 2.25rem;
   --text-display-md: 2.25rem;
@@ -74,6 +103,23 @@
 
   --shadow-field: 0 1px 2px rgb(27 36 49 / 0.06);
   --shadow-primary: 0 4px 12px -2px rgb(0 98 196 / 0.35);
+  --shadow-card: 0 1px 2px rgb(27 36 49 / 0.04), 0 4px 12px -4px rgb(27 36 49 / 0.06);
+  --shadow-popover: 0 8px 24px -6px rgb(27 36 49 / 0.18), 0 1px 3px rgb(27 36 49 / 0.08);
+
+  --animate-typing: typing 1.2s ease-in-out infinite;
+
+  @keyframes typing {
+    0%,
+    80%,
+    100% {
+      opacity: 0.25;
+      transform: translateY(0);
+    }
+    40% {
+      opacity: 1;
+      transform: translateY(-2px);
+    }
+  }
 
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }

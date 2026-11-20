@@ -14,6 +14,8 @@ const button = tv({
         "border border-line bg-canvas text-text shadow-field hover:bg-surface-subtle disabled:text-text-muted",
       ghost: "bg-transparent text-text hover:bg-surface-subtle disabled:text-text-muted",
       link: "rounded-xs bg-transparent font-medium text-primary underline-offset-2 hover:underline disabled:text-text-muted",
+      danger: "bg-danger text-on-ink hover:bg-danger/90 active:bg-danger/80 disabled:bg-danger/60",
+      "danger-soft": "bg-danger-soft text-danger hover:bg-danger/10 disabled:text-danger/60",
     },
     size: {
       sm: "text-xs",
@@ -23,16 +25,16 @@ const button = tv({
     block: { true: "w-full", false: "" },
   },
   compoundVariants: [
-    { variant: ["primary", "secondary", "ghost"], size: "sm", class: "h-8 px-3" },
-    { variant: ["primary", "secondary", "ghost"], size: "md", class: "h-9 px-3.5" },
-    { variant: ["primary", "secondary", "ghost"], size: "lg", class: "h-11 px-5" },
+    { variant: ["primary", "secondary", "ghost", "danger", "danger-soft"], size: "sm", class: "h-8 px-3" },
+    { variant: ["primary", "secondary", "ghost", "danger", "danger-soft"], size: "md", class: "h-9 px-3.5" },
+    { variant: ["primary", "secondary", "ghost", "danger", "danger-soft"], size: "lg", class: "h-11 px-5" },
   ],
   defaultVariants: { variant: "primary", size: "md", block: false },
 });
 
 export type ButtonProps = {
   children?: ReactNode;
-  variant?: "primary" | "secondary" | "ghost" | "link";
+  variant?: "primary" | "secondary" | "ghost" | "link" | "danger" | "danger-soft";
   size?: "sm" | "md" | "lg";
   block?: boolean;
   type?: "button" | "submit" | "reset";
@@ -46,6 +48,9 @@ export type ButtonProps = {
   "aria-expanded"?: boolean;
   "aria-controls"?: string;
   "aria-pressed"?: boolean;
+  "aria-disabled"?: boolean;
+  "aria-keyshortcuts"?: string;
+  title?: string;
   "data-testid"?: string;
 };
 

@@ -29,4 +29,23 @@ describe("Heading", () => {
       "max-w-[31.5rem]",
     );
   });
+
+  it.each([
+    ["page", "text-3xl"],
+    ["section", "text-2xl"],
+  ] as const)("has a sans %s title for app pages", (size, sizeClass) => {
+    render(
+      <Heading level={1} size={size} tone="muted">
+        Meu perfil
+      </Heading>,
+    );
+
+    expect(screen.getByRole("heading", { level: 1, name: "Meu perfil" })).toHaveClass(
+      "font-sans",
+      sizeClass,
+      "font-semibold",
+      "tracking-tight",
+      "text-text-muted",
+    );
+  });
 });

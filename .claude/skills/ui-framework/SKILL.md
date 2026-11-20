@@ -89,24 +89,30 @@ Every exported component of `@/shared/presentation/ui`. Add a row in the same ch
 
 | Component | Use it for | Doc |
 | --- | --- | --- |
-| Box | A surface: background, border, radius, padding, width; semantic element via `as` | [box](references/components/box.md) |
+| Box | A surface: background, border, radius, shadow, padding, width; semantic element via `as` | [box](references/components/box.md) |
 | Stack | Rows and columns with gap, alignment and wrap | [stack](references/components/stack.md) |
 | Divider | A 1px line between blocks, horizontal or vertical | [divider](references/components/divider.md) |
+| ScrollArea | The scrolling part of a full-height screen; can follow the end of a thread | [scroll-area](references/components/scroll-area.md) |
 
 ### Atoms
 
 | Component | Use it for | Doc |
 | --- | --- | --- |
 | Text | Paragraphs, labels, captions and inline runs | [text](references/components/text.md) |
-| Heading | Titles (`h1`-`h6`), display serif or sans | [heading](references/components/heading.md) |
+| Heading | Titles (`h1`-`h6`), display serif or sans (`page`, `section`) | [heading](references/components/heading.md) |
 | Link | Navigation (app routes, `tel:`, external) | [link](references/components/link.md) |
-| Button | Actions: `primary`, `secondary`, `ghost`, `link`; loading state | [button](references/components/button.md) |
+| Button | Actions: `primary`, `secondary`, `ghost`, `link`, `danger`, `danger-soft`; loading state | [button](references/components/button.md) |
+| IconButton | Icon-only actions with a required label; rail tiles with a count badge | [icon-button](references/components/icon-button.md) |
 | Icon | A Lucide glyph sized and colored by tokens | [icon](references/components/icon.md) |
 | Spinner | Indeterminate loading | [spinner](references/components/spinner.md) |
 | PageLoading | Full-screen loading state with a visible label (route fallbacks) | [page-loading](references/components/page-loading.md) |
 | Checkbox | A labeled on/off choice | [checkbox](references/components/checkbox.md) |
 | StatusDot | A colored dot for state | [status-dot](references/components/status-dot.md) |
-| Tag | A pill with optional status dot | [tag](references/components/tag.md) |
+| StatusLabel | A status in words with its colored dot | [status-label](references/components/status-label.md) |
+| Tag | A pill with optional dot or icon; neutral surfaces or tinted tones | [tag](references/components/tag.md) |
+| CountBadge | A small primary bubble with a number; nothing at zero | [count-badge](references/components/count-badge.md) |
+| Kbd | A keyboard shortcut shown in or beside a control | [kbd](references/components/kbd.md) |
+| Avatar | A person's initials in a name-derived tone, with presence | [avatar](references/components/avatar.md) |
 | Brand | The Nexo Assist logo or mark | [brand](references/components/brand.md) |
 
 ### Molecules
@@ -115,22 +121,41 @@ Every exported component of `@/shared/presentation/ui`. Add a row in the same ch
 | --- | --- | --- |
 | TextField | Labeled input with icon, label action, hint and error | [text-field](references/components/text-field.md) |
 | PasswordField | TextField for passwords with show/hide | [password-field](references/components/password-field.md) |
+| TextAreaField | Labeled multi-line field with hint and error | [text-area-field](references/components/text-area-field.md) |
+| SearchField | Rounded, filled search input with its magnifier | [search-field](references/components/search-field.md) |
 | Form | `<form>` with our validation, column layout and busy state | [form](references/components/form.md) |
 | Alert | Inline message for a form or section (`danger`, `info`) | [alert](references/components/alert.md) |
-| MessageBubble | One chat message, user or assistant, light or inverse | [message-bubble](references/components/message-bubble.md) |
+| MessageBubble | One chat message: side, tone, size, measure and meta | [message-bubble](references/components/message-bubble.md) |
+| TypingIndicator | Someone is writing: pulsing dots and who it is | [typing-indicator](references/components/typing-indicator.md) |
+| EventDivider | An event or a date marker between messages | [event-divider](references/components/event-divider.md) |
+| ChoiceChips | Quick answers to a question, chosen once | [choice-chips](references/components/choice-chips.md) |
+| FilterChips | One of a few filters over a list, with counts | [filter-chips](references/components/filter-chips.md) |
+| RadioList | A card of rich rows to pick one from | [radio-list](references/components/radio-list.md) |
+| SelectableRow | A list row that opens something; the open one stays highlighted | [selectable-row](references/components/selectable-row.md) |
+| DescriptionList | Label and value pairs, in columns or rows | [description-list](references/components/description-list.md) |
+| Disclosure | Show or hide more detail in place (inline toggle or list row) | [disclosure](references/components/disclosure.md) |
+| Breadcrumb | Where the page sits, root to current | [breadcrumb](references/components/breadcrumb.md) |
+| NavList | The app's main navigation; marks the current route | [nav-list](references/components/nav-list.md) |
+| EmptyState | Nothing to show yet, and what to do about it | [empty-state](references/components/empty-state.md) |
+| LoadingState | A region that is loading: spinner and label | [loading-state](references/components/loading-state.md) |
 | Stat / StatGroup | Big numbers with labels in separated columns | [stat](references/components/stat.md) |
 
 ### Organisms
 
 | Component | Use it for | Doc |
 | --- | --- | --- |
-| - | - | - |
+| Composer | Write and send a message (chat `inline`, console `round`) | [composer](references/components/composer.md) |
+| Menu | A trigger that opens a short list of actions | [menu](references/components/menu.md) |
+| ConfirmDialog | A modal that asks before a hard-to-undo action | [confirm-dialog](references/components/confirm-dialog.md) |
+| TopBar | The bar on top of a sidebar page: breadcrumb and status | [top-bar](references/components/top-bar.md) |
 
 ### Templates (page shells)
 
 | Component | Use it for | Doc |
 | --- | --- | --- |
 | SplitLayout | Ink brand aside + main column with header, centered content, footer (login) | [split-layout](references/components/split-layout.md) |
+| SidebarLayout | Fixed left sidebar (brand, nav, account) + full-height page (employee) | [sidebar-layout](references/components/sidebar-layout.md) |
+| ConsoleLayout | Icon rail + list column + main area + optional side panel (analyst console) | [console-layout](references/components/console-layout.md) |
 
 ## Enforcement
 

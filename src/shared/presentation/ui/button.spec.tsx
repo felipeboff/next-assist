@@ -73,4 +73,40 @@ describe("Button", () => {
     expect(button).toHaveClass("text-primary", "text-xs");
     expect(button).not.toHaveClass("h-8");
   });
+
+  it.each([
+    ["danger", "bg-danger", "text-on-ink"],
+    ["danger-soft", "bg-danger-soft", "text-danger"],
+  ] as const)("has a %s variant with the button height", (variant, surface, text) => {
+    render(
+      <Button variant={variant} size="lg">
+        Encerrar
+      </Button>,
+    );
+
+    expect(screen.getByRole("button", { name: "Encerrar" })).toHaveClass(surface, text, "h-11", "px-5");
+  });
+
+  it("announces a shortcut, a tooltip and a soft-disabled state that keeps focus", async () => {
+    const onClick = vi.fn();
+    render(
+      <Button
+        aria-keyshortcuts="Control+Enter"
+        aria-disabled
+        title="Responda a pergunta antes"
+        onClick={onClick}
+      >
+        Confirmar
+      </Button>,
+    );
+
+    const button = screen.getByRole("button", { name: "Confirmar" });
+    expect(button).toHaveAttribute("aria-keyshortcuts", "Control+Enter");
+    expect(button).toHaveAttribute("aria-disabled", "true");
+    expect(button).toHaveAttribute("title", "Responda a pergunta antes");
+    expect(button).toBeEnabled();
+
+    await userEvent.tab();
+    expect(button).toHaveFocus();
+  });
 });

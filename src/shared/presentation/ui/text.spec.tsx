@@ -45,5 +45,16 @@ describe("Text", () => {
       "whitespace-nowrap",
       "tabular-nums",
     );
+    expect(text).not.toHaveClass("italic");
+  });
+
+  it.each(["2xl", "3xl"] as const)("has the %s size and can be italic", (size) => {
+    render(
+      <Text size={size} italic>
+        Sem mensagens ainda
+      </Text>,
+    );
+
+    expect(screen.getByText("Sem mensagens ainda")).toHaveClass(`text-${size}`, "italic");
   });
 });

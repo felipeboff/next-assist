@@ -9,6 +9,8 @@ const heading = tv({
       "display-lg": "font-display text-display-lg font-normal tracking-normal",
       "display-md": "font-display text-display-md font-normal tracking-normal",
       "display-sm": "font-display text-display-sm font-normal tracking-normal",
+      page: "font-sans text-3xl font-semibold tracking-tight",
+      section: "font-sans text-2xl font-semibold tracking-tight",
       title: "font-sans text-lg font-semibold",
       subtitle: "font-sans text-md font-semibold",
     },
@@ -20,7 +22,7 @@ const heading = tv({
 export type HeadingProps = {
   level: 1 | 2 | 3 | 4 | 5 | 6;
   id?: string;
-  size?: "display-lg" | "display-md" | "display-sm" | "title" | "subtitle";
+  size?: "display-lg" | "display-md" | "display-sm" | "page" | "section" | "title" | "subtitle";
   tone?: Extract<TextTone, "default" | "on-ink" | "muted">;
   measure?: "none" | "md" | "lg";
   children: ReactNode;

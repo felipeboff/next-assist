@@ -48,4 +48,61 @@ describe("Box", () => {
     );
     expect(box).toHaveAttribute("data-testid", "box");
   });
+
+  it.each([
+    ["muted", "bg-surface-muted"],
+    ["primary-soft", "bg-primary-soft"],
+    ["warning-soft", "bg-warning-soft"],
+    ["canvas", "bg-canvas"],
+    ["subtle", "bg-surface-subtle"],
+    ["ink", "bg-ink"],
+  ] as const)("paints the %s surface", (surface, surfaceClass) => {
+    const { container } = render(<Box surface={surface}>x</Box>);
+
+    expect(container.firstElementChild).toHaveClass(surfaceClass);
+  });
+
+  it.each([
+    ["reply", "max-w-[37.5rem]"],
+    ["page", "max-w-[37.5rem]"],
+    ["thread", "max-w-[50.5rem]"],
+    ["form", "max-w-[23.75rem]"],
+    ["full", "w-full"],
+  ] as const)("limits the %s width", (width, widthClass) => {
+    const { container } = render(<Box width={width}>x</Box>);
+
+    expect(container.firstElementChild).toHaveClass("w-full", widthClass);
+  });
+
+  it("makes a card: soft border, card shadow and children clipped to the radius", () => {
+    const { container } = render(
+      <Box surface="canvas" border="line-soft" radius="xl" shadow="card" clip>
+        x
+      </Box>,
+    );
+
+    expect(container.firstElementChild).toHaveClass(
+      "border",
+      "border-line-soft",
+      "shadow-card",
+      "overflow-hidden",
+    );
+  });
+
+  it("pads the top and the bottom separately", () => {
+    const { container } = render(
+      <Box paddingTop="5xl" paddingBottom="lg">
+        x
+      </Box>,
+    );
+
+    expect(container.firstElementChild).toHaveClass("pt-12", "pb-4");
+  });
+
+  it("has no border, shadow or clipping unless asked", () => {
+    const { container } = render(<Box border="line">x</Box>);
+
+    expect(container.firstElementChild).toHaveClass("border-line");
+    expect(container.firstElementChild).not.toHaveClass("shadow-card", "overflow-hidden");
+  });
 });
