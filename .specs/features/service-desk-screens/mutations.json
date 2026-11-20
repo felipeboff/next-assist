@@ -1,0 +1,23 @@
+[
+  {
+    "file": "src/modules/conversations/domain/console-list.ts",
+    "old": "normalizeForMatch(field).includes(needle)",
+    "new": "normalizeForMatch(field).startsWith(needle)",
+    "proof": "pnpm exec vitest run src/modules/conversations/domain/console-list.spec.ts -t \"searchConversations\"",
+    "label": "C36 console search: contains -> starts with"
+  },
+  {
+    "file": "src/main/ticket-desk.ts",
+    "old": "deadlineFor: responseDeadline,",
+    "new": "deadlineFor: (_priority, from) => responseDeadline(\"critical\", from),",
+    "proof": "pnpm exec vitest run src/main/ticket-desk.integration.spec.ts -t \"ticket desk over the tickets module\"",
+    "label": "C73 door 1: draft deadline always uses the Critica SLA (found against C12, closed by C73)"
+  },
+  {
+    "file": "src/modules/conversations/domain/quick-answer.ts",
+    "old": "answer.startsWith(normalizeForMatch(option))",
+    "new": "answer.includes(normalizeForMatch(option))",
+    "proof": "pnpm exec vitest run src/modules/conversations/domain/quick-answer.spec.ts -t \"matchOption\"",
+    "label": "C7 typed answer: label starts the text -> label anywhere in it"
+  }
+]

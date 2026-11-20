@@ -54,6 +54,5 @@ design
 # demo recordings (skill demo)
 /.demos/
 
-# spec-lean: prototype captures stay local like design/; the author's pictures are versioned
-/.specs/features/*/captures/*.png
-!/.specs/features/*/captures/*.running.png
+# spec-lean: captures of the prototype and pictures of the running app stay local, like design/
+/.specs/features/*/captures/
