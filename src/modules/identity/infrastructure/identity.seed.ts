@@ -18,6 +18,9 @@ export const seedPeople: readonly SeedPerson[] = [
   { name: "Diego Rocha", email: "diego.rocha@nexo.com.br", role: "employee" },
   { name: "Marina Lopes", email: "marina.lopes@nexo.com.br", role: "analyst" },
   { name: "Rafael Nunes", email: "rafael.nunes@nexo.com.br", role: "analyst" },
+  // Easy-to-type accounts for trying the app (any password is accepted, e.g. 123456).
+  { name: "Funcionário Exemplo", email: "employee@example.com", role: "employee" },
+  { name: "Analista Exemplo", email: "analyst@example.com", role: "analyst" },
 ];
 
 export async function seedIdentity(db: Database): Promise<number> {
