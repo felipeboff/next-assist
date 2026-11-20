@@ -1,0 +1,6 @@
+pnpm-lock.yaml
+drizzle/
+.next/
+.claude/
+design/
+AGENTS.md
