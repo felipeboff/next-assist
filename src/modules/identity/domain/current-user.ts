@@ -8,6 +8,5 @@ export type CurrentUser = Readonly<{
 }>;
 
 export function firstNameOf(user: Pick<CurrentUser, "name">): string {
-  const [first] = user.name.trim().split(/\s+/);
-  return first || user.name;
+  return user.name.trim().split(/\s+/, 1)[0];
 }

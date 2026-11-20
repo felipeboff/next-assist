@@ -6,6 +6,7 @@ describe("firstNameOf", () => {
     ["Ana Souza", "Ana"],
     ["  Bruno   Carvalho ", "Bruno"],
     ["Felipe", "Felipe"],
+    ["   ", ""],
   ])("takes the first name of %j", (name, expected) => {
     expect(firstNameOf({ name })).toBe(expected);
   });

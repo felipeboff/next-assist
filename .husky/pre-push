@@ -1,0 +1,2 @@
+set -e
+pnpm test:unit:coverage

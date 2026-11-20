@@ -64,6 +64,11 @@ Every change that touches the framework updates this skill in the same change:
 A component without a doc row is not part of the framework yet: finish the doc before using it in
 a second place.
 
+Every component ships a colocated `<name>.spec.tsx` (Testing Library: roles, accessible names,
+interaction, the element rendered, and the classes a prop promises). `src/shared/presentation` is in
+the unit coverage scope with a 100% floor, so a new prop or branch without a test fails
+`pnpm test:unit:coverage` and the pre-push hook.
+
 ## Procedure
 
 1. Look the component up in the Index and open its doc: variations, main props, examples.
