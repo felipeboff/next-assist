@@ -6,6 +6,7 @@ import type { SignIn } from "@/modules/identity/application/use-cases/sign-in";
 export type IdentityDependencies = Readonly<{
   signIn: SignIn;
   signOut: () => Promise<void>;
+  requestPasswordReset: (email: string) => Promise<void>;
 }>;
 
 const IdentityDependenciesContext = createContext<IdentityDependencies | null>(null);

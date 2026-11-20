@@ -58,4 +58,14 @@ describe("identity browser composition", () => {
 
     expect(lastRequest().url).toBe(`${window.location.origin}/api/auth/sign-out`);
   });
+
+  it("asks for a password reset without calling the network (mocked until an e-mail service exists)", async () => {
+    vi.useFakeTimers();
+    const request = makeIdentityClientModule().requestPasswordReset("ana.souza@nexo.com.br");
+    await vi.runAllTimersAsync();
+
+    await expect(request).resolves.toBeUndefined();
+    expect(fetchMock).not.toHaveBeenCalled();
+    vi.useRealTimers();
+  });
 });

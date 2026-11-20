@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { authRouteHandlers, findCurrentUser } from "@/modules/identity/composition";
+import { authRouteHandlers, findCurrentUser, findPasswordChangedAt } from "@/modules/identity/composition";
 import { seedIdentity } from "@/modules/identity/infrastructure/identity.seed";
 import {
   cookieHeaderFrom,
@@ -45,6 +45,16 @@ describe("identity server composition", () => {
 
     expect(response.status).toBe(401);
     expect(response.headers.getSetCookie()).toEqual([]);
+  });
+
+  it("reads when the signed-in employee's password last changed", async () => {
+    const response = await authRouteHandlers.POST(signInRequest("ana.souza@nexo.com.br"));
+    vi.mocked(headers).mockResolvedValue(
+      new Headers({ cookie: cookieHeaderFrom(response) }) as Awaited<ReturnType<typeof headers>>,
+    );
+    const user = await findCurrentUser();
+
+    await expect(findPasswordChangedAt(user?.id ?? "")).resolves.toBeInstanceOf(Date);
   });
 
   it("serves the session endpoint over GET", async () => {
